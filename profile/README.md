@@ -25,6 +25,10 @@ a real display manager login has not been done yet.
 - global menu: unity-gtk-module exports gtk2/gtk3 menus, indicator-appmenu shows them,
   hud answers queries
 - unity-settings-daemon, unity-greeter (test mode), the lock screen settings
+- unity-control-center: appearance, display, time and date (with the world map), text entry,
+  details, keyboard, sharing, and the rest of the grid. the theme dropdowns need a theme
+  package, and the printers panel has no tile (an upstream gap, `unity-control-center printers`
+  still opens it)
 - session files: `unity.desktop` in xsessions, `unity-session.target` and the units it
   pulls in, clean logout through cinnamon-session
 - the whole chain builds from scratch in a clean `archlinux:base-devel` container
@@ -33,7 +37,6 @@ a real display manager login has not been done yet.
 
 - a real login through a display manager (plasmalogin/sddm/lightdm). the unit graph
   verifies and the session dry run passes, but nobody has logged in yet
-- unity-control-center, in progress, see the packages list
 - lock screen and screen unlock through the real pam stack (the pam file is shipped,
   untested)
 - indicator menus inside submenus (the messages indicator's per app submenus), the factory
@@ -108,13 +111,13 @@ plasmalogin / sddm / lightdm
 | unity-settings-daemon | 15.04.1.21.10.20220802 | accountsservice input sources dropped |
 | unity-session | 49.4 | own entry script, depends on cinnamon for a schema |
 | unity-greeter | 25.04.1 | no lightdm conf override, you pick the greeter |
-| unity-control-center | 15.04.0.23.04.20230220 | in progress |
+| unity-control-center | 15.04.0.23.04.20230220 | alt tap shortcut reverted (needs ubuntu's gtk), region panel uses glibc locales instead of language-tools |
 | unity-scope-home, unity-lens-files, unity-lens-applications | 6.8.2, 7.1.0, 7.1.0 | applications lens ported to zeitgeist 2.0 and xapian 2 |
 | ido, libindicator-gtk3 | 13.10.0, 16.10.0 | the menu item factory port |
 | indicator-* (nine) | various | whoopsie, fcitx, dbustest and other ubuntu only bits dropped |
 | hud, indicator-appmenu, unity-gtk-module, libcolumbus | | global menu stack, hud built without dee-qt |
 | libunity, dee, libunity-misc, gsettings-ubuntu-schemas, unity-asset-pool, cmake-extras | | as ubuntu ships them |
-| glewmx, geis, grail, frame, xpathselect, libgeonames | | small leaf libraries arch doesn't have |
+| glewmx, geis, grail, frame, xpathselect, libgeonames | | small leaf libraries arch doesn't have (timezonemap comes from arch) |
 | ubuntu-unity-settings | 22.10 | gschema override for the yaru look |
 | unity-desktop | | meta package pulling in everything above |
 
