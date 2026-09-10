@@ -56,10 +56,8 @@ a real display manager login has not been done yet.
   `cinnamon-common` split, arch doesn't. a smaller fix is welcome
 - the indicator menu factory port (ido + libindicator) should walk submenus and anchor
   replacements on something better than position
-- ubuntu-unity-settings points at the yaru theme, which lives in the aur. either package
-  yaru here or default to ambiance
-- the greeter's schema defaults name ambiance, ubuntu-mono-dark and the ubuntu font, a
-  theme package should carry the override
+- ubuntu-unity-settings points at the yaru theme, which lives in the aur. the ambiance
+  look is packaged here (`unity-ambiance-settings`), yaru is not yet
 - ci builds on a 2 core runner, the chain takes a long time. cache built packages between
   runs or split the workflow per package
 - no signing on the pacman repo yet
@@ -119,6 +117,8 @@ plasmalogin / sddm / lightdm
 | libunity, dee, libunity-misc, gsettings-ubuntu-schemas, unity-asset-pool, cmake-extras | | as ubuntu ships them |
 | glewmx, geis, grail, frame, xpathselect, libgeonames | | small leaf libraries arch doesn't have (timezonemap comes from arch) |
 | ubuntu-unity-settings | 22.10 | gschema override for the yaru look |
+| light-themes, ubuntu-mono, humanity-icon-theme, ttf-ubuntu-font-family, ubuntu-wallpapers | 24.04, 0.6.16, 0.869, 26.04.2 | ambiance and radiance with everything they reference |
+| unity-ambiance-settings | 1 | gschema override that switches unity and the greeter to ambiance, installs after the yaru one |
 | unity-desktop | | meta package pulling in everything above |
 
 ## install
@@ -130,6 +130,11 @@ Server = https://github.com/unity-arch/packages/releases/download/repo
 ```
 
 then `pacman -Sy unity-desktop`, log out, pick "Unity" in your display manager.
+
+the default look is yaru (from the aur, optional). for the classic ubuntu look,
+`pacman -S unity-ambiance-settings`, it pulls in ambiance, radiance, ubuntu-mono,
+humanity, the ubuntu font and the warty wallpaper, and switches the defaults to them.
+`gtk-engine-murrine` from the aur makes gtk2 apps match.
 
 ## contributing
 
